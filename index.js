@@ -11,7 +11,7 @@ const app = express();
 dbConnection();
 
 //Cors
-app.use(cors());
+app.use(cors()); //Habilita cors
 
 //Directorio publico
 app.use(express.static('public'));
@@ -21,7 +21,10 @@ app.use(express.json());
 
 //rutas
 app.use('/api/auth', require('./routes/auth')); //too lo que se exporte de './routes/auth' se va a habilitar en '/api/auth'
+app.use('/api/events', require('./routes/events')); //too lo que se exporte de './routes/events' se va a habilitar en '/api/events'
 //Todo: CRUD: Eventos
+
+
 
 //Escuchar peticiones
 app.listen(process.env.PORT, () => {

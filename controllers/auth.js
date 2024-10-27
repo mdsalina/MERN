@@ -6,7 +6,6 @@ const { generarJWT } = require('../helpers/jwt');
 const crearUsuario=async(req, res=response) => {
 
     const {email,password}=req.body;
-
     try {
         let usuario = await Usuario.findOne({email}); //busca un usuario con el email que se pasa por parametro si no lo encuetra devuelve null
         if(usuario){
@@ -18,12 +17,13 @@ const crearUsuario=async(req, res=response) => {
         
         usuario = new Usuario(req.body);
 
+
         //Encriptar contraseña
         const salt = bcrypt.genSaltSync();
         usuario.password=bcrypt.hashSync(password,salt);
 
         await usuario.save(); //guarda el usuario en la base de datos
-
+        console.log("usuario guardado");
         //Generar el JWT
         const token = await generarJWT(usuario.id,usuario.name);
 
