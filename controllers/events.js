@@ -81,6 +81,7 @@ const eliminarEvento = async(req, res) => {
 
     try {
         const evento = await Evento.findById(eventoId); //buscar el evento por el id
+        console.log(evento);
         if(!evento){
             res.status(404).json({
                 ok: false,
@@ -91,7 +92,7 @@ const eliminarEvento = async(req, res) => {
         if(evento.user.toString() !== uid){
             return res.status(401).json({
                 ok: false,
-                msg: 'No tiene privilegio de editar este evento'
+                msg: 'No tiene privilegio de eliminar este evento'
             });
         }
 
